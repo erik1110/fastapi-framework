@@ -11,5 +11,17 @@ def index():
 def about():
     return {"data": "about page"}
 
+
+@app.get('/blog/unmatch')
+def unmatch():
+    # you should push this function before show
+    # cause fastapi sequentially find the route
+    return {"data": "unmatch" }
+
+@app.get('/blog/{id}')
+def show(id: int):
+    # fetch blog with id = id
+    return {"data": id }
+
 # if __name__ == "__main__":
 #     uvicorn.run(app, host="0.0.0.0", port=8000)

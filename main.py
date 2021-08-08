@@ -1,16 +1,20 @@
+from typing import Optional
 import uvicorn
 from fastapi import FastAPI
 
 app = FastAPI()
 
-@app.get('/')
-def index():
-    return {"data": {"hello world!": '123'}}
-
 @app.get('/about')
 def about():
     return {"data": "about page"}
 
+@app.get('/blog')
+def index(limit=10, published: bool = True, sort: Optional[str] = None):
+    # only get 10 published
+    if published:
+        return {"data": f"{limit} published blogs from db" }
+    else:
+        return {"data": f"{limit} blogs from db" }
 
 @app.get('/blog/unmatch')
 def unmatch():
